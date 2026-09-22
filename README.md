@@ -1,20 +1,33 @@
-# Raindrop Middle School Open House
+# Open House Information Hub
 
-A responsive information hub for the Raindrop Education 2026–2027 Boys Middle School mentorship program. The site brings the annual calendar, parent and student expectations, curriculum resources, reading plans, permission forms, payments, camp registration, PMA information, and program-home support into one mobile-friendly experience.
+A responsive single-page site that gives families everything they need about a
+school mentorship program in one place. Built to replace a stack of printed
+handouts that went out of date the moment they were printed.
 
-**Live site:** [raindrop-open-house.pages.dev](https://raindrop-open-house.pages.dev/)
+The site pulls the annual calendar, program expectations, curriculum resources,
+reading plans, registration information, and support contacts into one
+mobile-first page, so a parent standing in a hallway on their phone can find the
+same thing an administrator would look up on a desktop.
 
-## Highlights
+## Why it looks like this
 
-- Component-based React and TypeScript architecture
+Open house material changes every year, but the shape of it doesn't. So the
+layout is fixed and the content lives in a single data file — a coordinator can
+update next year's calendar, book list, or schedule without touching a component.
+
+QR codes are generated at build time rather than pasted in as images, which means
+a link can change without anyone having to regenerate and re-upload a picture.
+
+## Features
+
 - Data-driven calendar, book catalog, expectations, and resource sections
-- Interactive 7th/8th grade reading-plan tabs
-- Generated QR codes for the website and winter camp registration
-- Preserved QR assets for WhatsApp groups, permission forms, book fees, and Zelle support
+- Interactive grade-level reading-plan tabs
+- Generated QR codes for page links and registration forms
+- Two-day program schedule component
 - Responsive navigation and layouts for phones, tablets, and desktops
 - Scroll progress indicator and accessible semantic sections
-- Downloadable annual calendar and sample daily program PDFs
-- Cloudflare Pages-compatible Vite build
+- Downloadable calendar and sample daily program PDFs
+- Content integrity tests so a bad data edit fails the build instead of the page
 
 ## Tech stack
 
@@ -22,6 +35,7 @@ A responsive information hub for the Raindrop Education 2026–2027 Boys Middle 
 - **QR generation:** qrcode.react
 - **Styling:** Responsive CSS, CSS Grid, custom design tokens
 - **Testing:** Vitest
+- **CI/CD:** GitHub Actions
 - **Deployment:** Cloudflare Pages
 
 ## Project structure
@@ -30,7 +44,7 @@ A responsive information hub for the Raindrop Education 2026–2027 Boys Middle 
 src/
 ├── components/
 │   ├── BookCatalog.tsx     # Interactive grade-level book tabs
-│   ├── BrandMark.tsx       # Reusable Raindrop visual mark
+│   ├── BrandMark.tsx       # Reusable visual mark
 │   ├── QrCard.tsx          # Generated or image-based QR cards
 │   ├── Schedule.tsx        # Two-day program schedule
 │   └── SectionHeading.tsx  # Shared section typography
@@ -39,7 +53,7 @@ src/
 │   └── content.test.ts     # Content integrity tests
 ├── App.tsx                 # Page composition and navigation behavior
 ├── main.tsx                # React entry point
-└── styles.css              # Complete responsive design system
+└── styles.css              # Responsive design system
 
 public/
 ├── assets/                 # QR codes and book-cover assets
@@ -66,14 +80,17 @@ The optimized production output is generated in `dist/`.
 ## Deploy to Cloudflare Pages
 
 1. Import this repository into Cloudflare Pages.
-2. Use `npm run build` as the build command.
-3. Use `dist` as the build output directory.
+2. Set the build command to `npm run build`.
+3. Set the build output directory to `dist`.
 4. No environment variables are required.
 
-## Updating program content
+## Updating content
 
-Most annual updates can be made in `src/data/content.ts` without changing the React layout. Replace files in `public/assets/` when QR codes or book covers change, and keep the same filenames to avoid component edits.
+Most annual updates happen in `src/data/content.ts` without touching the React
+layout. Replace files in `public/assets/` when QR codes or cover images change,
+keeping the same filenames so no component edits are needed.
 
 ## Privacy
 
-This is a public information website. It does not collect, store, or transmit visitor data and does not require a database or backend service.
+A public information site with no backend. It does not collect, store, or
+transmit visitor data, and requires no database or external service at runtime.
