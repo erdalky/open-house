@@ -18,6 +18,17 @@ update next year's calendar, book list, or schedule without touching a component
 QR codes are generated at build time rather than pasted in as images, which means
 a link can change without anyone having to regenerate and re-upload a picture.
 
+## A note on the live site
+
+The deployed site isn't linked here. It carries information specific to one
+community — schedules, contacts, forms, and payment details meant for the
+families enrolled in the program — and that doesn't belong in a public
+repository. This README covers the architecture and the code, which is the part
+worth reading anyway.
+
+If you're reviewing my work and want to see it running, ask me and I'll share it
+directly.
+
 ## Features
 
 - Data-driven calendar, book catalog, expectations, and resource sections
